@@ -1,0 +1,111 @@
+<!-- <h1>name {{ firstName.touched }}</h1> -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Register</h4>
+        </div>
+
+        <div class="card-body">
+          <form (ngSubmit)="register()" #signUpForm="ngForm" novalidate [formGroup]="registerForm">
+
+            <!-- First Name -->
+            <div class="mb-3">
+              <label class="form-label">First Name</label>
+              <input type="text"
+                     name="firstName"
+                     class="form-control"
+                     required
+                     minlength="3"
+                     placeholder="Enter first name"
+                     formControlName="firstName">
+
+              <div class="invalid-feedback" >
+                First name is required
+              </div>
+              <div class="invalid-feedback">
+                Minimum 3 characters
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+              <label class="form-label">Last Name</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Enter last name"
+                     name="lastName"
+                     required
+                     formControlName="lastName">
+
+              <div class="invalid-feedback">
+                Last name is required
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email"
+                     class="form-control"
+                     placeholder="Enter email"
+                     name="email"
+                     required
+                     email
+                     formControlName="email">
+
+              <div class="invalid-feedback">
+                Enter a valid email
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password"
+                     class="form-control"
+                     placeholder="Enter password"
+                     name="password"
+                     required
+                     minlength="6"
+                     formControlName="password">
+
+              <div class="invalid-feedback">
+                Password must be at least 6 characters
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password"
+                     class="form-control"
+                     placeholder="Confirm password"
+                     name="confirmPassword"
+                     required
+                     formControlName="confirmPassword">
+
+              <div class="invalid-feedback">
+                Confirm password is required
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit"
+                      class="btn btn-success"
+                      [disabled]="signUpForm.invalid">
+                Register
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

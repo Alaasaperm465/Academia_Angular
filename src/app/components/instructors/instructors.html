@@ -1,0 +1,26 @@
+<!-- src/app/instructors/instructors.component.html -->
+<div class="container mt-4">
+  <h2>Instructors</h2>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let instructor of instructors">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ instructor.name }}</h5>
+          <p class="card-text"><strong>Email:</strong> {{ instructor.email }}</p>
+          <p class="card-text"><strong>Specialty:</strong> {{ instructor.specialty }}</p>
+          <p class="card-text"><strong>Courses:</strong> {{ instructor.courses?.length }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+<a routerLink="/addInstructor" routerLinkActive="active" class="btn btn-primary mb-3">
+  + Add Instructor
+</a>
+
+</div>

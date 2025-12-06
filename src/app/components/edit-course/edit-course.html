@@ -1,0 +1,34 @@
+<div class="container mt-4" *ngIf="course">
+  <h2>Edit Course</h2>
+
+  <form (ngSubmit)="submit()">
+
+    <div class="mb-3">
+      <label>Title</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="course.title" name="title">
+    </div>
+
+    <div class="mb-3">
+      <label>Description</label>
+      <textarea class="form-control"
+                [(ngModel)]="course.description" name="description"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Duration</label>
+      <input type="number" class="form-control"
+             [(ngModel)]="course.duration" name="duration">
+    </div>
+
+    <div class="mb-3">
+      <label>Instructor ID</label>
+      <input type="number" class="form-control"
+             [(ngModel)]="course.instructorId" name="instructorId">
+    </div>
+
+    <button class="btn btn-success">Save</button>
+  </form>
+</div>
+
+ 

@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2>Add Instructor</h2>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <form (ngSubmit)="submit()">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="instructor.name"
+             name="name"
+             required>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control"
+             [(ngModel)]="instructor.email"
+             name="email"
+             required>
+    </div>
+
+    <div class="mb-3">
+      <label>Specialty</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="instructor.specialty"
+             name="specialty"
+             required>
+    </div>
+
+    <button class="btn btn-success" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Add Instructor' }}
+    </button>
+
+  </form>
+</div>

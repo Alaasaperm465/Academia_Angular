@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" routerLink="/home">MyApp</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/courses" routerLinkActive="active">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/instructors" routerLinkActive="active">Instructors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/students" routerLinkActive="active">Students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-primary ms-lg-2" routerLink="/login" routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary ms-2 " routerLink="/register" routerLinkActive="active">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary ms-2 " (click)="logout()">Logout</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
