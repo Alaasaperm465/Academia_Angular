@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-instructor-details',
@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class InstructorDetails {
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  // لاحقًا لما تجيب بيانات المعلم
+  // this.cdr.detectChanges(); لتحديث الـ UI
 }

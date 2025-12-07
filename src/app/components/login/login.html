@@ -1,27 +1,61 @@
-<form (ngSubmit)="login()">
+<div class="container mt-5 d-flex align-items-center justify-content-center min-vh-90">
+  <div class="card login-card shadow-lg border-0 rounded-4" style="max-width: 600px; width: 100%;">
 
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email"
-           class="form-control"
-           [(ngModel)]="email"
-           name="email"
-           required>
+    <!-- Header -->
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h4 class="mb-1">Login</h4>
+      <small>Enter your credentials to login</small>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+      <form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input type="email" class="form-control" placeholder="Enter your email"
+                 [(ngModel)]="email" name="email"
+                 #emailInput="ngModel" required email>
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger mt-1">
+            <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+            <div *ngIf="emailInput.errors?.['email']">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group mb-4">
+          <label class="form-label fw-semibold">Password</label>
+          <input type="password" class="form-control" placeholder="Enter your password"
+                 [(ngModel)]="password" name="password"
+                 #passwordInput="ngModel" required minlength="6">
+          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger mt-1">
+            <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
+            <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters.</div>
+          </div>
+        </div>
+
+        <!-- Login Button -->
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-success rounded-pill py-3 fs-5"
+                  [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </div>
+
+        <!-- Register Link -->
+        <div class="text-center">
+          <small>
+            Don't have an account?
+            <a routerLink="/register" class="text-success fw-bold text-decoration-none">
+              Register
+            </a>
+          </small>
+        </div>
+
+      </form>
+
+    </div>
   </div>
-
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="password"
-           class="form-control"
-           [(ngModel)]="password"
-           name="password"
-           required>
-  </div>
-
-  <div class="d-grid mb-2">
-    <button type="submit" class="btn btn-success">
-      Login
-    </button>
-  </div>
-
-</form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,13 +19,15 @@ export class EditCourse implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.courseService.getCourseById(this.id).subscribe(res => {
       this.course = res;
+      this.cdr.detectChanges(); // تحديث الفورم فورًا
     });
   }
 

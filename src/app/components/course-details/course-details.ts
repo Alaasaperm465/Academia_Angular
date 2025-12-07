@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseService, Course } from '../../services/course';
 
@@ -13,16 +13,54 @@ import { CourseService, Course } from '../../services/course';
 export class CourseDetails implements OnInit {
 
   course!: Course;
+  courses: Course[] = [];
+
+  currentIndex = -1;
+  hasNext = false;
+  hasPrevious = false;
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private router: Router,
+    private courseService: CourseService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.courseService.getCourses().subscribe(data => {
+      this.courses = data;
+
+      this.route.paramMap.subscribe(params => {
+        const id = Number(params.get('id'));
+        this.loadCourse(id);
+      });
+    });
+  }
+
+  loadCourse(id: number) {
     this.courseService.getCourseById(id).subscribe(res => {
       this.course = res;
+
+      this.currentIndex = this.courses.findIndex(c => c.id === id);
+
+      this.hasPrevious = this.currentIndex > 0;
+      this.hasNext = this.currentIndex < this.courses.length - 1;
+
+      this.cdr.detectChanges(); // تحديث فورًا بعد تحميل الكورس
     });
+  }
+
+  goNext() {
+    if (this.hasNext) {
+      const nextId = this.courses[this.currentIndex + 1].id;
+      this.router.navigate(['/courseDetails', nextId]);
+    }
+  }
+
+  goPrevious() {
+    if (this.hasPrevious) {
+      const prevId = this.courses[this.currentIndex - 1].id;
+      this.router.navigate(['/courseDetails', prevId]);
+    }
   }
 }

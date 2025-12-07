@@ -1,0 +1,12 @@
+.login-card {
+  width: 600px;
+  height: 600px;
+}
+
+.card-body {
+  height: calc(600px - 110px); /* طرح ارتفاع الهيدر */
+}
+  app-navbar,
+  app-footer {
+    display: none;
+  }

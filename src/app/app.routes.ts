@@ -16,19 +16,20 @@ import { EditCourse } from './components/edit-course/edit-course';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
 //   { path: 'home', component: Home, title: 'Home Page' },
-  { path: 'courses', component: Courses, title: 'course Page' },
-  { path: 'add-course', component: AddCourse, title: 'add course Page' },
-  { path: 'courseDetails/:id', component: CourseDetails, title:"course details" },
-  { path: 'edit-course/:id', component: EditCourse ,title:"edit course" },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'courses', component: Courses, title: 'course Page', canActivate:[authGuard] },
+  { path: 'add-course', component: AddCourse, title: 'add course Page', canActivate:[authGuard] },
+  { path: 'courseDetails/:id', component: CourseDetails, title:"course details", canActivate:[authGuard] },
+  { path: 'edit-course/:id', component: EditCourse ,title:"edit course", canActivate:[authGuard] },
   { path: 'login' , component:Login, title:'Login Page'},
   { path: 'register' , component:Register, title:'Login Page'},
   { path: 'instructors', component: Instructors, title: 'Products Page', canActivate:[authGuard]},
-  { path: 'instructorDetails', component: InstructorDetails, title: 'instructor Details' },
-  { path: 'addInstructor', component: AddInstructor, title: 'Add Instructor' },
-  { path: 'students', component: Students, title: 'Students' },
-  { path: 'addStudent', component: AddStudent, title: 'Add Students' },
-  { path: 'atudentDetails', component: StudentDetails, title: 'Student Details' },
+  { path: 'instructorDetails', component: InstructorDetails, title: 'instructor Details', canActivate:[authGuard] },
+  { path: 'addInstructor', component: AddInstructor, title: 'Add Instructor', canActivate:[authGuard] },
+  { path: 'students', component: Students, title: 'Students', canActivate:[authGuard] },
+  { path: 'addStudent', component: AddStudent, title: 'Add Students', canActivate:[authGuard] },
+  { path: 'atudentDetails', component: StudentDetails, title: 'Student Details', canActivate:[authGuard] },
 
 ];
