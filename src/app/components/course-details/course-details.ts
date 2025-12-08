@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseService, Course } from '../../services/course';
+import { Instructor, InstructorService } from '../../services/instructor';
 
 @Component({
   selector: 'app-course-details',
@@ -23,18 +24,30 @@ export class CourseDetails implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private courseService: CourseService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private _instructorService: InstructorService,
   ) {}
 
-  ngOnInit(): void {
-    this.courseService.getCourses().subscribe(data => {
-      this.courses = data;
+ngOnInit(): void {
+
+  this._instructorService.getInstructors().subscribe(instructors => {
+    this._instructorService.instructors = instructors;
+
+    this.courseService.getCourses().subscribe(courses => {
+      this.courses = courses;
 
       this.route.paramMap.subscribe(params => {
         const id = Number(params.get('id'));
         this.loadCourse(id);
       });
     });
+
+  });
+
+}
+
+  getInstructorName(id: number): string {
+  return this._instructorService.getInstructorNameById(id);
   }
 
   loadCourse(id: number) {
@@ -46,7 +59,7 @@ export class CourseDetails implements OnInit {
       this.hasPrevious = this.currentIndex > 0;
       this.hasNext = this.currentIndex < this.courses.length - 1;
 
-      this.cdr.detectChanges(); // تحديث فورًا بعد تحميل الكورس
+      this.cdr.detectChanges(); 
     });
   }
 

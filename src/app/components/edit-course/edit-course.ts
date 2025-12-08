@@ -27,14 +27,14 @@ export class EditCourse implements OnInit {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.courseService.getCourseById(this.id).subscribe(res => {
       this.course = res;
-      this.cdr.detectChanges(); // تحديث الفورم فورًا
+      this.cdr.detectChanges(); 
     });
   }
 
   submit() {
     this.courseService.updateCourse(this.id, this.course).subscribe({
       next: () => {
-        alert('Course Updated ✅');
+        alert('Course Updated ');
         this.router.navigate(['/courses']);
       }
     });

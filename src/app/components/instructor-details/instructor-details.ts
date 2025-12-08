@@ -10,6 +10,5 @@ export class InstructorDetails {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  // لاحقًا لما تجيب بيانات المعلم
-  // this.cdr.detectChanges(); لتحديث الـ UI
+
 }

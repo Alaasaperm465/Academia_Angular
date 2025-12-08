@@ -14,18 +14,30 @@ export interface Instructor {
   providedIn: 'root'
 })
 export class InstructorService {
+
   private apiUrl = 'https://localhost:7252/api/Instructor';
+  instructors: Instructor[] = []; // ✅ نخزن الداتا هنا
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Get All
   getInstructors(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.apiUrl).pipe(
       catchError(err => throwError(() => err))
     );
   }
 
-  // ✅ Add Instructor
+  loadInstructors() {
+    this.getInstructors().subscribe(data => {
+      this.instructors = data;
+    });
+  }
+
+  getInstructorNameById(id: number): string {
+  const instructor = this.instructors.find(i => Number(i.id) === Number(id));
+  return instructor ? instructor.name : 'غير معروف';
+}
+
+
   addInstructor(data: Instructor): Observable<any> {
     return this.http.post(this.apiUrl, data).pipe(
       catchError(err => throwError(() => err))

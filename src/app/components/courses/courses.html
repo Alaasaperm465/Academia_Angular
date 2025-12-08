@@ -25,8 +25,7 @@
           </p>
 
           <p><strong>Duration:</strong> {{ course.duration }} hours</p>
-          <p><strong>Instructor ID:</strong> {{ course.instructorId }}</p>
-          <p><strong>Students:</strong> {{ course.students?.length }}</p>
+          <p><strong>Instructor:</strong> {{ getInstructorName(course.instructorId) }}</p>
         </div>
 
         <!-- Buttons -->

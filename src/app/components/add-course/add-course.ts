@@ -33,7 +33,7 @@ export class AddCourse {
 
     this.courseService.addCourse(this.course).subscribe({
       next: () => {
-        alert('Course Added Successfully ✅');
+        alert('Course Added Successfully ');
         this.router.navigate(['/courses']);
       },
       error: (err) => {

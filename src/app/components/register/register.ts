@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { Auth } from '../../services/auth';
@@ -21,14 +21,10 @@ export class Register implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _userAuth: Auth,
-    private _router: Router
+    private _router: Router,
+    private _cdr: ChangeDetectorRef
   ) {
-            this._router.events
-          .pipe(filter(event => event instanceof NavigationEnd))
-          .subscribe((event: any) => {
-            const hiddenRoutes = ['/login', '/register'];
-            this.showLayout = !hiddenRoutes.includes(event.urlAfterRedirects);
-          });
+          this._cdr.detectChanges();
   }
 
   ngOnInit(): void {
@@ -56,10 +52,13 @@ export class Register implements OnInit {
     this._userAuth.Register(user).subscribe({
       next: (res) => {
         console.log('Register Success', res);
+        this._cdr.detectChanges();
       },
       error: (err) => {
         console.log('Register Error', err);
+        this._cdr.detectChanges();
       }
+      
     });
   }
 }

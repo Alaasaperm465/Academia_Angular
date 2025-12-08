@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Course, CourseService } from '../../services/course';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { InstructorService } from '../../services/instructor';
 
 @Component({
   selector: 'app-courses',
@@ -21,15 +22,20 @@ export class Courses implements OnInit, OnDestroy {
 
   constructor(
     private courseService: CourseService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private _instructorService: InstructorService
   ) {}
 
-  ngOnInit(): void {
+ngOnInit(): void {
+
+  this._instructorService.getInstructors().subscribe(instructors => {
+    this._instructorService.instructors = instructors;
+
     this.dataResponse = this.courseService.getCourses().subscribe({
       next: (data) => {
         this.courses = data;
         this.loading = false;
-        this.cdr.detectChanges(); // تحديث الـ UI بعد تحميل البيانات
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
@@ -38,7 +44,14 @@ export class Courses implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       }
     });
-  }
+
+  });
+
+}
+
+getInstructorName(id: number): string {
+  return this._instructorService.getInstructorNameById(id);
+}
 
   ngOnDestroy(): void {
     this.dataResponse.unsubscribe();
@@ -49,7 +62,7 @@ export class Courses implements OnInit, OnDestroy {
       this.courseService.deleteCourse(id).subscribe({
         next: () => {
           this.courses = this.courses.filter(c => c.id !== id);
-          this.cdr.detectChanges(); // تحديث الـ UI بعد الحذف
+          this.cdr.detectChanges(); 
         },
         error: (err) => console.error(err)
       });

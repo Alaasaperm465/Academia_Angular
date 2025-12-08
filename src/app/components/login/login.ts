@@ -34,7 +34,6 @@ export class Login {
       next: (res) => {
         console.log(res);
         this._auth.saveToken(res.token);
-        // localStorage.setItem('token', Response.token);
         this._router.navigate(['/courses']); 
       },
       error: (err) => {

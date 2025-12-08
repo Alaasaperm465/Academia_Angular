@@ -35,5 +35,6 @@ export class Instructors implements OnInit {
         this.cdr.detectChanges();
       }
     });
+    this._instructorService.loadInstructors()
   }
 }

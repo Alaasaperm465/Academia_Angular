@@ -32,7 +32,7 @@ export class AddInstructor {
 
     this.instructorService.addInstructor(this.instructor).subscribe({
       next: () => {
-        alert('Instructor Added Successfully ✅');
+        alert('Instructor Added Successfully ');
         this.router.navigate(['/instructors']);
       },
       error: (err) => {
